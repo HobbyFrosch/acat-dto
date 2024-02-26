@@ -11,7 +11,7 @@ use ACAT\Dto\Exceptions\UnknownProperties;
 use ACAT\Dto\Reflection\DataTransferObjectClass;
 
 #[CastWith(DataTransferObjectCaster::class)]
-abstract class Dto
+abstract class DataTransferObject
 {
     protected array $exceptKeys = [];
 
