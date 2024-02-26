@@ -5,25 +5,25 @@ namespace ACAT\Dto\Reflection;
 use ReflectionClass;
 use ReflectionProperty;
 use ACAT\Dto\Attributes\Strict;
-use ACAT\Dto\Dto;
+use ACAT\Dto\DataTransferObject;
 use ACAT\Dto\Exceptions\ValidationException;
 
 class DataTransferObjectClass
 {
     private ReflectionClass $reflectionClass;
 
-    private Dto $dataTransferObject;
+    private DataTransferObject $dataTransferObject;
 
     private bool $isStrict;
 
-    public function __construct(Dto $dataTransferObject)
+    public function __construct(DataTransferObject $dataTransferObject)
     {
         $this->reflectionClass = new ReflectionClass($dataTransferObject);
         $this->dataTransferObject = $dataTransferObject;
     }
 
     /**
-     * @return \ACAT\Dto\Reflection\DataTransferObjectProperty[]
+     * @return DataTransferObjectProperty[]
      */
     public function getProperties(): array
     {
@@ -41,6 +41,9 @@ class DataTransferObjectClass
         );
     }
 
+    /**
+     * @throws ValidationException
+     */
     public function validate(): void
     {
         $validationErrors = [];

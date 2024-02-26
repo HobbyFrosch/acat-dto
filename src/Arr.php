@@ -67,7 +67,7 @@ class Arr
             return $array[$key];
         }
 
-        if (strpos($key, '.') === false) {
+        if (!str_contains($key, '.')) {
             return $array[$key] ?? $default;
         }
 
@@ -82,8 +82,7 @@ class Arr
         return $array;
     }
 
-    public static function accessible($value)
-    {
+    public static function accessible($value) : bool {
         return is_array($value) || $value instanceof ArrayAccess;
     }
 

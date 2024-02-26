@@ -3,12 +3,13 @@
 namespace ACAT\Dto\Exceptions;
 
 use Exception;
-use ACAT\Dto\Dto;
+use ACAT\Dto\DataTransferObject;
+use ACAT\Dto\Validation\ValidationResult;
 
 class ValidationException extends Exception
 {
     public function __construct(
-        public Dto $dataTransferObject,
+        public DataTransferObject $dataTransferObject,
         public array $validationErrors,
     ) {
         $className = $dataTransferObject::class;
@@ -16,9 +17,9 @@ class ValidationException extends Exception
         $messages = [];
 
         foreach ($validationErrors as $fieldName => $errorsForField) {
-            /** @var \ACAT\Dto\Validation\ValidationResult $errorForField */
+            /** @var ValidationResult $errorForField */
             foreach ($errorsForField as $errorForField) {
-                $messages[] = "\t - `{$className}->{$fieldName}`: {$errorForField->message}";
+                $messages[] = "\t - `$className->$fieldName`: $errorForField->message";
             }
         }
 

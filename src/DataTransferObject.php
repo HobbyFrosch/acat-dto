@@ -6,6 +6,7 @@ use ReflectionClass;
 use ReflectionProperty;
 use ACAT\Dto\Attributes\CastWith;
 use ACAT\Dto\Attributes\MapTo;
+use ACAT\Dto\Exceptions\ValidationException;
 use ACAT\Dto\Casters\DataTransferObjectCaster;
 use ACAT\Dto\Exceptions\UnknownProperties;
 use ACAT\Dto\Reflection\DataTransferObjectClass;
@@ -17,6 +18,10 @@ abstract class DataTransferObject
 
     protected array $onlyKeys = [];
 
+    /**
+     * @throws ValidationException
+     * @throws UnknownProperties
+     */
     public function __construct(...$args)
     {
         if (is_array($args[0] ?? null)) {
@@ -41,7 +46,10 @@ abstract class DataTransferObject
     public static function arrayOf(array $arrayOfParameters): array
     {
         return array_map(
-            fn (mixed $parameters) => new static($parameters),
+        /**
+         * @throws UnknownProperties
+         * @throws ValidationException
+         */ fn (mixed $parameters) => new static($parameters),
             $arrayOfParameters
         );
     }
@@ -86,6 +94,10 @@ abstract class DataTransferObject
         return $dataTransferObject;
     }
 
+    /**
+     * @throws UnknownProperties
+     * @throws ValidationException
+     */
     public function clone(...$args): static
     {
         return new static(...array_merge($this->toArray(), $args));
@@ -107,7 +119,7 @@ abstract class DataTransferObject
     protected function parseArray(array $array): array
     {
         foreach ($array as $key => $value) {
-            if ($value instanceof Dto) {
+            if ($value instanceof DataTransferObject) {
                 $array[$key] = $value->toArray();
 
                 continue;

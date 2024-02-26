@@ -3,6 +3,7 @@
 namespace ACAT\Dto\Tests\Casters;
 
 use Exception;
+use ACAT\Dto\DataTransferObject;
 use ACAT\Dto\Attributes\CastWith;
 use ACAT\Dto\Caster;
 use ACAT\Dto\Dto;
@@ -25,14 +26,14 @@ class ArrayCasterTest extends TestCase
     }
 }
 
-class Bar extends Dto
+class Bar extends DataTransferObject
 {
     /** @var \ACAT\Dto\Tests\Foo[] */
     #[CastWith(FooArrayCaster::class)]
     public array $collectionOfFoo;
 }
 
-class Foo extends Dto
+class Foo extends DataTransferObject
 {
     public string $name;
 }

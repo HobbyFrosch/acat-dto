@@ -11,6 +11,9 @@ class CastWith
 {
     public array $args;
 
+    /**
+     * @throws InvalidCasterClass
+     */
     public function __construct(
         public string $casterClass,
         mixed ...$args

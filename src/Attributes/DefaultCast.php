@@ -24,7 +24,7 @@ class DefaultCast
     {
         $type = $property->getType();
 
-        /** @var \ReflectionNamedType[]|null $types */
+        /** @var ReflectionNamedType[]|null $types */
         $types = match ($type::class) {
             ReflectionNamedType::class => [$type],
             ReflectionUnionType::class => $type->getTypes(),

@@ -3,9 +3,9 @@
 namespace ACAT\Dto\Tests\Casters;
 
 use LogicException;
+use ACAT\Dto\DataTransferObject;
 use ACAT\Dto\Attributes\CastWith;
 use ACAT\Dto\Casters\EnumCaster;
-use ACAT\Dto\Dto;
 use ACAT\Dto\Tests\Stubs\IntegerEnum;
 use ACAT\Dto\Tests\Stubs\SimpleEnum;
 use ACAT\Dto\Tests\Stubs\StringEnum;
@@ -67,7 +67,7 @@ class EnumCasterTest extends TestCase
     }
 }
 
-class EnumCastedDataTransferObject extends Dto
+class EnumCastedDataTransferObject extends DataTransferObject
 {
     #[CastWith(EnumCaster::class, StringEnum::class)]
     public ?StringEnum $stringEnum;

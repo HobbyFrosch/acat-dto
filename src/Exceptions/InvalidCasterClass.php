@@ -12,7 +12,7 @@ class InvalidCasterClass extends Exception
         $expected = Caster::class;
 
         parent::__construct(
-            "Class `{$className}` doesn't implement {$expected} and can't be used as a caster"
+            "Class `$className` doesn't implement $expected and can't be used as a caster"
         );
     }
 }

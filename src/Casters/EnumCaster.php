@@ -2,6 +2,7 @@
 
 namespace ACAT\Dto\Casters;
 
+use BackedEnum;
 use LogicException;
 use ACAT\Dto\Caster;
 
@@ -13,8 +14,7 @@ class EnumCaster implements Caster
     ) {
     }
 
-    public function cast(mixed $value): mixed
-    {
+    public function cast(mixed $value): BackedEnum {
         if ($value instanceof $this->enumType) {
             return $value;
         }

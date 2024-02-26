@@ -3,7 +3,7 @@
 namespace ACAT\Dto\Casters;
 
 use ACAT\Dto\Caster;
-use ACAT\Dto\Dto;
+use ACAT\Dto\DataTransferObject;
 
 class DataTransferObjectCaster implements Caster
 {
@@ -12,7 +12,7 @@ class DataTransferObjectCaster implements Caster
     ) {
     }
 
-    public function cast(mixed $value): Dto
+    public function cast(mixed $value): DataTransferObject
     {
         foreach ($this->classNames as $className) {
             if ($value instanceof $className) {

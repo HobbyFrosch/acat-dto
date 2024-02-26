@@ -2,6 +2,7 @@
 
 namespace ACAT\Dto\Reflection;
 
+use ACAT\Dto\DataTransferObject;
 use JetBrains\PhpStorm\Immutable;
 use ReflectionAttribute;
 use ReflectionClass;
@@ -13,7 +14,6 @@ use ACAT\Dto\Attributes\CastWith;
 use ACAT\Dto\Attributes\DefaultCast;
 use ACAT\Dto\Attributes\MapFrom;
 use ACAT\Dto\Caster;
-use ACAT\Dto\Dto;
 use ACAT\Dto\Validator;
 
 class DataTransferObjectProperty
@@ -21,14 +21,14 @@ class DataTransferObjectProperty
     #[Immutable]
     public string $name;
 
-    private Dto $dataTransferObject;
+    private DataTransferObject $dataTransferObject;
 
     private ReflectionProperty $reflectionProperty;
 
     private ?Caster $caster;
 
     public function __construct(
-        Dto $dataTransferObject,
+        DataTransferObject $dataTransferObject,
         ReflectionProperty $reflectionProperty
     ) {
         $this->dataTransferObject = $dataTransferObject;
@@ -49,7 +49,7 @@ class DataTransferObjectProperty
     }
 
     /**
-     * @return \ACAT\Dto\Validator[]
+     * @return Validator[]
      */
     public function getValidators(): array
     {
@@ -86,7 +86,7 @@ class DataTransferObjectProperty
             return $this->resolveCasterFromDefaults();
         }
 
-        /** @var \ACAT\Dto\Attributes\CastWith $attribute */
+        /** @var CastWith $attribute */
         $attribute = $attributes[0]->newInstance();
 
         return new $attribute->casterClass(
@@ -137,7 +137,7 @@ class DataTransferObjectProperty
         }
 
         foreach ($defaultCastAttributes as $defaultCastAttribute) {
-            /** @var \ACAT\Dto\Attributes\DefaultCast $defaultCast */
+            /** @var DefaultCast $defaultCast */
             $defaultCast = $defaultCastAttribute->newInstance();
 
             if ($defaultCast->accepts($this->reflectionProperty)) {
