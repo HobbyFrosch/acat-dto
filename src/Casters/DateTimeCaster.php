@@ -21,7 +21,7 @@ class DateTimeCaster implements Caster {
      * @param mixed $types
      * @param string|null $format
      */
-    public function __construct(mixed $types, ?string $format) {
+    public function __construct(mixed $types, ?string $format = null) {
         $this->format = $format;
     }
 
