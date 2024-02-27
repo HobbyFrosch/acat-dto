@@ -4,7 +4,6 @@ namespace ACAT\Dto\Casters;
 
 use ACAT\Dto\Caster;
 use DateTimeImmutable;
-use TheSeer\Tokenizer\Exception;
 use ACAT\Dto\Exceptions\InvalidCasterClass;
 
 /**
@@ -15,7 +14,7 @@ class DateTimeCaster implements Caster {
     /**
      * @var string|null
      */
-    private ?string $format = null;
+    private ?string $format;
 
     /**
      * @param mixed $types
