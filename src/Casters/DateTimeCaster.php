@@ -2,6 +2,7 @@
 
 namespace ACAT\Dto\Casters;
 
+use DateTime;
 use ACAT\Dto\Caster;
 use DateTimeImmutable;
 use ACAT\Dto\Exceptions\InvalidCasterClass;
@@ -26,11 +27,11 @@ class DateTimeCaster implements Caster {
 
     /**
      * @param mixed $value
-     * @return DateTimeImmutable
+     * @return DateTime
      * @throws InvalidCasterClass
      */
-    public function cast(mixed $value) : DateTimeImmutable {
-        if ($this->format && ($dateTime = DateTimeImmutable::createFromFormat($this->format, $value))) {
+    public function cast(mixed $value) : DateTime {
+        if ($this->format && ($dateTime = DateTime::createFromFormat($this->format, $value))) {
             return $dateTime;
         }
         throw new InvalidCasterClass('no or wrong format');
