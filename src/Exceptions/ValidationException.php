@@ -23,6 +23,6 @@ class ValidationException extends Exception
             }
         }
 
-        parent::__construct("Validation errors:" . PHP_EOL . implode(PHP_EOL, $messages));
+        parent::__construct("Validation errors:" . PHP_EOL . implode(PHP_EOL, $messages), 400);
     }
 }
